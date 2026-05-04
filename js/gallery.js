@@ -84,7 +84,30 @@ const markup = images.map(({ preview, original, description }) => {
     
 }).join('');
 
-galleryElements.insertAdjacentHTML("beforeend",markup);
+galleryElements.insertAdjacentHTML("beforeend", markup);
+
+galleryElements.addEventListener("click", handlerClick);
+
+function handlerClick(event) {
+  if (event.target.nodeName !== "IMG")
+    return;
+
+  event.preventDefault();
+  console.log("ok")
+  const largeImage = event.target.dataset.source;
+  console.log(largeImage);
+
+  const instance = basicLightbox.create(`
+
+  <div class="modal">
+     <img src="${largeImage}" />
+    </div>
+`)
+  instance.show();
+  
+}
+
+
 
 
     
